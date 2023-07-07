@@ -1,0 +1,45 @@
+import os
+import csv
+# budget = os.path.join('.', 'Resources', 'pybudget_data.csv')
+budget = r".\Resources\pybudget_data.csv"
+print(f'Financial Analysis\n -----------------------\n')
+months = 0
+total = 0
+change = 0
+previous = 0
+greatest_increase=0
+greatest_decrease=0
+greatest_increase_month=""
+greatest_decrease_month=""
+changelist = []
+with open(budget, 'r') as csvfile:
+
+    # Split the data on commas
+    csvreader = csv.reader(csvfile, delimiter=',')
+
+    header = next(csvreader)
+
+    # Loop through the data
+    for row in csvreader:
+        months = months+1
+        total = total+int(row[1])
+            #         print (row[1])
+        change = int(row[1]) - previous
+        previous = int(row[1])
+        changelist.append(change)
+        if change > greatest_increase:
+            greatest_increase = change
+            greatest_increase_month = row[0]
+           
+        if change < greatest_decrease:
+            greatest_decrease = change
+            greatest_decrease_month = row[0]
+            
+        
+        
+changelist.pop(0)        
+print(f'Months: {months}')
+print(f'Total: {total}')
+print(f'Average Change: {sum(changelist)/(months-1)}')
+print(f'Greatest Increase: {greatest_increase},{greatest_increase_month}')
+print(f'Greatest Decrease: {greatest_decrease},{greatest_decrease_month}')

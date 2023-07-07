@@ -1,0 +1,51 @@
+import os
+import csv
+# budget = os.path.join('.', 'Resources', 'pybudget_data.csv')
+csvfile = r".\Resources\election_data.csv"
+print(f'Election Results\n -----------------------\n')
+
+totalvotes=0
+candidate_votes={}
+candidate_name=[]
+
+# Read the csv and convert it into a list of dictionaries
+with open(csvfile) as election_data:
+    reader = csv.reader(election_data)
+
+    # Read the header
+    header = next(reader)
+
+    # For each row...
+    for row in reader:
+        totalvotes = totalvotes+1
+        total_candidates=row[1]
+        
+
+        # Extract the candidate name from each row
+         # If the candidate does not match any existing candidate...
+        # (In a way, our loop is "discovering" candidates as it goes)
+           
+                
+            # Add it to the list of candidates in the running
+           
+            # And begin tracking that candidate's voter count
+
+        # Then add a vote to that candidate's count
+        for candidate_name in df['Candidate']:
+            if candidate_name not in candidate_name:
+                candidate_options.append(df["Candidate"])
+                candidate_votes[df["Candidate"]] = 1
+            else:
+                candidate_votes[df["Candidate"]] = candidate_votes[df["Candidate"]] + 1
+      
+   
+    candidate_votes = df.groupby('Candidate')['Total Votes'].sum()
+    
+    candidate_percentages = (candidate_votes / totalvotes) * 100
+    
+print(f'Total Votes: {totalvotes}')
+    
+print("Breakdown of votes:")
+for candidate, votes in candidate_votes.items():
+        percentage = candidate_percentages[candidate]
+        print(f"{candidate}: {votes} votes ({percentage}")
